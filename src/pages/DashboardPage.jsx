@@ -2,6 +2,7 @@ import ApartmentCard from "../components/ApartmentCard";
 import "../styles/dashboard.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const apartments = [
   {
@@ -48,7 +49,8 @@ function DashboardPage() {
           placeholder="Search apartments by address or neighbourhood..."
         />
 
-        <div className="profile">Alex</div>
+        <div className="profile">{user?.email}</div>
+        <button className="logout-btn" onClick={handleLogout}>Sign Out</button>
       </header>
 
       <main className="dashboard-content">

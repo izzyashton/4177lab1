@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/auth.css";
-import "../context/AuthContext"
+import { useAuth } from "../context/AuthContext";
 
 function AuthCard() {
   const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +22,7 @@ function AuthCard() {
     event.preventDefault();
     const e = validate();
     if (Object.keys(e).length > 0) { setErrors(e); return; }
-    setUser({ name, email });
+    setUser({email });
     navigate("/dashboard");
   }
 
@@ -45,7 +46,7 @@ function AuthCard() {
                 <input type="password"  value={password} onChange={e => setPassword(e.target.value)} />
                 {errors.password && <span className="error">{errors.password}</span>}
             </div>
-            <button className="primary-btn full-width">Sign In</button>
+            <button type="submit" className="primary-btn full-width">Sign In</button>
         </form>
 
         <p className="small-text">
